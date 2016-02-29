@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <script src="libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/directives.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/theme.css">
+</head>
+<body ng-app="restorantApp" ng-controller="RestaurantSearchCtrl">
+
+<div id="searchbar">
+ 	<input id="searchbox" type="text" ng-model="q" restorant-enter="searchRestaurants(q)">
+  <img id="searchbutton" ng-click="searchRestaurants(q)"/>
+</div>
+
+<div id="searchresults">
+  <ul>
+    <li ng-repeat="r in foundRestaurants">
+      <span>{{r.name}}</span>
+      <p>{{r.snippet}}</p>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
