@@ -47,6 +47,11 @@ task buildImage(type: DockerBuildImage) {
   tag = 'xebialabs/rest-o-rant-web'
 }
 
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}
+
 httpPort = 8080
 stopPort = 9451
 stopKey = 'foo'
