@@ -1,13 +1,50 @@
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'com.bmuschko.docker-java-application'
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:2.6.6'
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
+docker {
+    url = 'https://192.168.99.100:2376'
+    certPath = new File(System.properties['user.home'], '.docker/machine/machines/docker0')
+}
+
 dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '1.4'
     compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+}
+
+task createDockerfile(type: Dockerfile) {
+  destFile = project.file('build/docker/Dockerfile')
+  from 'nginx'
+  maintainer 'Vincent Partington <vpartington@xebialabs.com>'
+  copyFile('webapp', '/usr/share/nginx/html')
+}
+
+task copyWebapp(type: Copy) {
+  from('src/main/webapp')
+  into('build/docker/webapp')
+}
+
+task buildImage(type: DockerBuildImage) {
+  dependsOn createDockerfile, copyWebapp
+  inputDir = createDockerfile.destFile.parentFile
+  tag = 'xebialabs/rest-o-rant-web'
 }
 
 httpPort = 8080
