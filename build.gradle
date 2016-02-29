@@ -9,8 +9,6 @@ buildscript {
   }
 }
 
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'jetty'
 apply plugin: 'com.bmuschko.docker-remote-api'
