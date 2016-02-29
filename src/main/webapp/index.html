@@ -2,21 +2,23 @@
 <html lang="en-US">
 <head>
   <script src="libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="libs/angularjs/1.5.0/angular-resource.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/directives.js"></script>
+  <script src="js/services.js"></script>
   <link rel="stylesheet" type="text/css" href="css/theme.css">
 </head>
-<body ng-app="restorantApp" ng-controller="RestaurantSearchCtrl">
+<body ng-app="restorantApp" ng-controller="RestaurantCtrl">
 
 <div id="searchbar">
- 	<input id="searchbox" type="text" ng-model="q" restorant-enter="searchRestaurants(q)">
-  <img id="searchbutton" ng-click="searchRestaurants(q)"/>
+ 	<input id="searchbox" type="text" ng-model="q" restorant-enter="findRestaurants(q)">
+  <img id="searchbutton" ng-click="findRestaurants(q)"/>
 </div>
 
 <div id="searchresults">
   <ul>
-    <li ng-repeat="r in foundRestaurants">
+    <li ng-repeat="r in restaurants">
       <span>{{r.name}}</span>
       <p>{{r.snippet}}</p>
     </li>
