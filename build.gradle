@@ -1,32 +1,35 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.bmuschko:gradle-docker-plugin:2.6.6'
+  }
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'jetty'
-apply plugin: 'com.bmuschko.docker-java-application'
+apply plugin: 'com.bmuschko.docker-remote-api'
 
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:2.6.6'
-    }
-}
-
 repositories {
-    mavenCentral()
-}
-
-docker {
-    url = 'https://192.168.99.100:2376'
-    certPath = new File(System.properties['user.home'], '.docker/machine/machines/docker0')
+  mavenCentral()
 }
 
 dependencies {
-    compile group: 'commons-io', name: 'commons-io', version: '1.4'
-    compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+  compile group: 'commons-io', name: 'commons-io', version: '1.4'
+  compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+}
+
+docker {
+  url = 'https://192.168.99.100:2376'
+  certPath = new File(System.properties['user.home'], '.docker/machine/machines/docker0')
 }
 
 task createDockerfile(type: Dockerfile) {
@@ -47,11 +50,10 @@ task buildImage(type: DockerBuildImage) {
   tag = 'xebialabs/rest-o-rant-web'
 }
 
-
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.11'
+  gradleVersion = '2.11'
 }
 
 httpPort = 8080
 stopPort = 9451
-stopKey = 'foo'
+stopKey = 'stop-rest-o-rant-web'

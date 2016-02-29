@@ -1,15 +1,15 @@
 var restorantDirectives = angular.module('restorantDirectives', []);
 
 restorantDirectives.directive('restorantEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.$eval(attrs.restorantEnter);
-                });
-
-                event.preventDefault();
-            }
+  return function (scope, element, attrs) {
+    element.bind("keydown keypress", function (event) {
+      if(event.which === 13) {
+        scope.$apply(function (){
+          scope.$eval(attrs.restorantEnter);
         });
-    };
+
+        event.preventDefault();
+      }
+    });
+  };
 });
