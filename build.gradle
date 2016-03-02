@@ -27,14 +27,7 @@ dependencies {
 
 docker {
   url = 'https://192.168.99.100:2376'
-  certPath = new File(System.properties['user.home'], '.docker/machine/machines/docker0')
-}
-
-task createDockerfile(type: Dockerfile) {
-  destFile = project.file('build/docker/Dockerfile')
-  from 'nginx'
-  maintainer 'Vincent Partington <vpartington@xebialabs.com>'
-  copyFile('webapp', '/usr/share/nginx/html')
+  certPath = new File(System.properties['user.home'], '.docker/machine/machines/dkr-dev')
 }
 
 task copyWebapp(type: Copy) {
@@ -42,8 +35,22 @@ task copyWebapp(type: Copy) {
   into('build/docker/webapp')
 }
 
-task buildImage(type: DockerBuildImage) {
-  dependsOn createDockerfile, copyWebapp
+task copyNginx(type: Copy) {
+  from('src/main/nginx')
+  into('build/docker/nginx')
+}
+
+task createDockerfile(type: Dockerfile) {
+  dependsOn copyWebapp, copyNginx
+  destFile = project.file('build/docker/Dockerfile')
+  from 'nginx'
+  maintainer 'Vincent Partington <vpartington@xebialabs.com>'
+  copyFile('webapp', '/usr/share/nginx/html')
+  copyFile('nginx', '/etc/nginx/conf.d')
+}
+
+task buildDockerImage(type: DockerBuildImage) {
+  dependsOn createDockerfile
   inputDir = createDockerfile.destFile.parentFile
   tag = 'dkr-reg:5000/rest-o-rant-web'
 }
