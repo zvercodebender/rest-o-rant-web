@@ -45,7 +45,7 @@ task copyWebapp(type: Copy) {
 task buildImage(type: DockerBuildImage) {
   dependsOn createDockerfile, copyWebapp
   inputDir = createDockerfile.destFile.parentFile
-  tag = 'xebialabs/rest-o-rant-web'
+  tag = 'dkr-reg:5000/rest-o-rant-web'
 }
 
 task wrapper(type: Wrapper) {
