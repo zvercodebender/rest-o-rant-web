@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<udm.DeploymentPackage version="$BUILD_NUMBER.0" application="rest-o-rent-web">
+<udm.DeploymentPackage version="$BUILD_NUMBER.0" application="rest-o-rant-web">
   <application />
   <orchestrator />
   <deployables>
-    <www.WebContent name="/rest-o-rent-web" file="/distributions/rest-o-rent-web">
+    <www.WebContent name="/rest-o-rant-web" file="/distributions/rest-o-rant-web">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
     </www.WebContent>
