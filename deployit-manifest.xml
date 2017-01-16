@@ -10,7 +10,7 @@
     <www.ApacheProxyPassSpec name="/proxy-pass">
       <tags />
       <from>/{{APP_CONTEXT_ROOT}}</from>
-      <to>http://{{APPSERVER_HOST}}:{{APPSERVER_PORT}}/{{APP_CONTEXT_ROOT}}</to>
+      <to>http://{{APPSERVER_HOST}}:{{APPSERVER_PORT}}/rest-o-rant-api</to>
       <reverse>true</reverse>
     </www.ApacheProxyPassSpec>
   </deployables>
