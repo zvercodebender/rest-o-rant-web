@@ -22,7 +22,7 @@ repositories {
 
 task copyDistWebapp(type: Copy) {
   from('src/main/webapp')
-  into('build/distributions/rest-o-rent-web')
+  into('build/distributions/rest-o-rant-web')
 }
 
 build.dependsOn copyDistWebapp
