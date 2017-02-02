@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>REST-o-rant</title>
-  <script src="libs/angularjs/1.5.0/angular.min.js"></script>
-  <script src="libs/angularjs/1.5.0/angular-resource.min.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/directives.js"></script>
-  <script src="js/services.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/theme.css">
+    <title>REST-o-rant</title>
+    <script src="libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="libs/angularjs/1.5.0/angular-resource.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/services.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/theme.css">
 </head>
 <body ng-app="restorantApp" ng-controller="RestaurantCtrl">
 
-<div id="searchbar">
- 	<input id="searchbox" type="text" ng-model="q" restorant-enter="findRestaurants(q)">
-  <img id="searchbutton" ng-click="findRestaurants(q)"/>
+<div id="rest-o-rant-title">
+    <img id="rest-o-rant-img" src="img/logo--yoshi-restorant-3.png">
 </div>
 
-<div id="searchresults">
-  <ul>
-    <li ng-repeat="r in restaurants">
-      <span>{{r.name}}</span>
-      <p>{{r.snippet}}</p>
-    </li>
-  </ul>
+<div id="rest-o-rant-heading">
+    Find the best restaurants near you!
 </div>
+
+<div id="searchpanel">
+    <input id="searchbox" type="text" ng-model="q" restorant-enter="findRestaurants(q)">
+    <button id="searchbutton" ng-click="findRestaurants(q)">Search</button>
+</div>
+
+<ul class="list-unstyled">
+    <li id="searchlist" ng-repeat="r in restaurants">
+        <div id="searchresults">
+            <span style="font-family: 'Ubuntu Medium'">{{r.name}}</span>
+            <p>{{r.snippet}}</p>
+        </div>
+    </li>
+</ul>
+
 </body>
 </html>
