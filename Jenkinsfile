@@ -10,7 +10,7 @@ node {
       }
     }
     stage('Package') {
-      xldCreatePackage artifactsPath: 'build/distributions', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
+      xldCreatePackage artifactsPath: 'build', manifestPath: 'deployit-manifest.xml', darPath: '$JOB_NAME-$BUILD_NUMBER.0.dar'
     }
 
     stage('Publish And Deploy') {
