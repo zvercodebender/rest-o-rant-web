@@ -69,7 +69,7 @@ task createDockerfile(type: Dockerfile) {
   copyFile('nginx', '/etc/nginx/conf.d')
   addFile('https://github.com/kreuzwerker/envplate/releases/download/v0.0.8/ep-linux', '/usr/local/bin/ep')
   runCommand('chmod +x /usr/local/bin/ep')
-  instruction('CMD ["/usr/local/bin/ep", "-v", "/etc/nginx/nginx.conf", "--", "/usr/sbin/nginx", "-g", "daemon off;"]')
+  instruction('CMD ["/usr/local/bin/ep", "-v", "/etc/nginx/conf.d/*.conf", "--", "/usr/sbin/nginx", "-g", "daemon off;"]')
 }
 
 task buildDockerImage(type: DockerBuildImage) {
