@@ -65,10 +65,11 @@ task createDockerfile(type: Dockerfile) {
   from 'nginx'
   maintainer 'Vincent Partington <vpartington@xebialabs.com>'
   environmentVariable('API_ENDPOINT','http://rest-o-rant-api:8080/')
+  environmentVariable('NGINX_LISTEN','80')
   copyFile('webapp', '/usr/share/nginx/html')
   copyFile('nginx', '/etc/nginx/conf.d')
   addFile('https://github.com/kreuzwerker/envplate/releases/download/v0.0.8/ep-linux', '/usr/local/bin/ep')
-  runCommand('chmod +x /usr/local/bin/ep')
+  runCommand('chmod +x /usr/local/bin/ep && chmod -R 777 /etc/nginx/conf.d && mkdir -p /var/cache/nginx && mkdir -p /var/run && chmod -R 777 /var/cache/nginx /var/run')
   instruction('CMD ["/usr/local/bin/ep", "-v", "/etc/nginx/conf.d/*.conf", "--", "/usr/sbin/nginx", "-g", "daemon off;"]')
 }
 
