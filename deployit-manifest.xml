@@ -3,7 +3,7 @@
   <application />
   <orchestrator />
   <deployables>
-    <www.WebContent name="/rest-o-rant-web" file="/distributions/rest-o-rant-web">
+    <www.WebContent name="/rest-o-rant-web" file="/distributions/rest-o-rant-web.zip">
       <tags />
       <scanPlaceholders>false</scanPlaceholders>
     </www.WebContent>
