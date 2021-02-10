@@ -4,17 +4,10 @@ buildscript {
     jcenter()
   }
 
-  dependencies {
-    classpath 'com.bmuschko:gradle-docker-plugin:2.6.7'
-  }
 }
 
 apply plugin: 'war'
 apply plugin: 'jetty'
-apply plugin: 'com.bmuschko.docker-remote-api'
-
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
 repositories {
   mavenCentral()
@@ -30,11 +23,6 @@ build.dependsOn copyDistWebapp
 dependencies {
   compile group: 'commons-io', name: 'commons-io', version: '1.4'
   compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
-}
-
-docker {
-  url = 'https://192.168.99.100:2376'
-  certPath = new File(System.properties['user.home'], '.docker/machine/machines/dkr-dev')
 }
 
 task copyWebapp(type: Copy) {
@@ -54,12 +42,6 @@ task createDockerfile(type: Dockerfile) {
   maintainer 'Vincent Partington <vpartington@xebialabs.com>'
   copyFile('webapp', '/usr/share/nginx/html')
   copyFile('nginx', '/etc/nginx/conf.d')
-}
-
-task buildDockerImage(type: DockerBuildImage) {
-  dependsOn createDockerfile
-  inputDir = createDockerfile.destFile.parentFile
-  tag = "dkr-reg:5000/rest-o-rant-web:$version"
 }
 
 task wrapper(type: Wrapper) {
