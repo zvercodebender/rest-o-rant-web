@@ -23,4 +23,4 @@ spec:
     bytesToReadFromContainerLogs: "4000"
     file: !file "artifacts/rest-o-rant-web.yaml"
   applicationDependencies:
-    rest-o-rant-api: "1.1"
+    rest-o-rant-api: "[0.0.1,2.0.0)"
