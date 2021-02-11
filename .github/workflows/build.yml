@@ -1,8 +1,6 @@
 name: Build-rest-o-rant-web
 on:
   push:
-    tags:
-      - '*'
 jobs:
   rest-o-rant-web-version:
     runs-on: ubuntu-latest
