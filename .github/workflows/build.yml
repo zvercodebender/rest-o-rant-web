@@ -1,4 +1,4 @@
-name: Build-PetPortalHosts
+name: Build-rest-o-rant-web
 on:
   push:
     tags:
