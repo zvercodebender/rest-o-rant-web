@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-./gradlew clean build
+if [ -z "${VERSION}" ]
+then
+  echo "VERSION not set"
+  exit -1
+fi
+echo "Version = ${VERSION}"
 
-#cp -R src/main/webapp build/distributions/rest-o-rant-web
-#cp -R src/main/webapp build/docker/webapp
+./gradlew clean build

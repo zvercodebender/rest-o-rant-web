@@ -13,41 +13,11 @@ repositories {
   mavenCentral()
 }
 
-task copyDistWebapp(type: Copy) {
-  from('src/main/webapp')
-  into('build/distributions/rest-o-rant-web')
-}
-
-build.dependsOn copyDistWebapp
-
 dependencies {
   compile group: 'commons-io', name: 'commons-io', version: '1.4'
   compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
 }
 
-task copyWebapp(type: Copy) {
-  from('src/main/webapp')
-  into('build/docker/webapp')
-}
-
-task copyNginx(type: Copy) {
-  from('src/main/nginx')
-  into('build/docker/nginx')
-}
-
-task createDockerfile(type: Dockerfile) {
-  dependsOn copyWebapp, copyNginx
-  destFile = project.file('build/docker/Dockerfile')
-  from 'nginx'
-  maintainer 'Vincent Partington <vpartington@xebialabs.com>'
-  copyFile('webapp', '/usr/share/nginx/html')
-  copyFile('nginx', '/etc/nginx/conf.d')
-}
-
 task wrapper(type: Wrapper) {
   gradleVersion = '2.11'
 }
-
-httpPort = 8080
-stopPort = 9451
-stopKey = 'stop-rest-o-rant-web'
