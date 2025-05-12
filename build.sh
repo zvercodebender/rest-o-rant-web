@@ -7,6 +7,7 @@ then
 fi
 echo "Version = ${VERSION}"
 
-find /home/runner/.gradle -name gradle -exec chmod +x {} +
+echo "Current DIR = `pwd`"
+find . -name gradle -exec chmod +x {} +
 
 ./gradlew clean build
