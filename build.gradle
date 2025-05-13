@@ -1,23 +1,25 @@
 buildscript {
   repositories {
     mavenCentral()
-    jcenter()
+    // Remove jcenter()
   }
-
 }
 
-apply plugin: 'war'
-apply plugin: 'jetty'
+plugins {
+  id 'war'
+  id 'org.gretty' version '3.0.5' // Jetty plugin alternative
+}
 
 repositories {
   mavenCentral()
 }
 
-dependencies {
-  compile group: 'commons-io', name: 'commons-io', version: '1.4'
-  compile group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
-}
+// dependencies {
+//   implementation 'commons-io:commons-io:1.4'
+//   implementation 'log4j:log4j:1.2.15'
+// }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '2.11'
+tasks.named('wrapper') {
+  gradleVersion = '8.5'
+  distributionType = Wrapper.DistributionType.BIN
 }

@@ -4,3 +4,5 @@ build
 classes/
 .DS_Store
 *.iml
+.env
+nohup.out
